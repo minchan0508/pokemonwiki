@@ -1,0 +1,46 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@import url("https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css");
+
+.container{
+  margin: 0 auto;
+  border: 1px solid black;
+  width: 80%;
+  display: flex;
+  gap: 50px;
+  /* justify-content: space-between; */
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.type_container{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.type_container div{
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 30px;
+  text-align: center;
+}
+.box{
+  text-align: center;
+  flex-grow: 0;
+  width: 400px;
+  padding: 30px;
+  padding-top: 100px;
+  height: 400px;
+  font-family: "Galmuri11", sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  box-shadow: 1px 1px 5px black;
+}
+.box img{
+  width: 100px;
+  /* animation: img_animation .6s infinite alternate; */
+  height: 100px;
+}
