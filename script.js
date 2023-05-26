@@ -5,36 +5,47 @@ const asdasd = await fetch(
   "https://pokeapi.co/api/v2/pokemon-species/23/"
 ).then((response) => response.json());
 
-console.log(asdasd);
-
-const asd = await fetch(results[1].url).then((response) => response.json());
-console.log(results[1]);
 const container = document.querySelector(".container");
+const search_input = document.querySelector(".search_input")
 
 //무한스크롤
 let count = 0;
-render(count);
+render(results, count , 50);
 count += 50;
 
+let onfocus_input = false 
+
+search_input.addEventListener("focus" , function(){onfocus_input = true})
+search_input.addEventListener("input" , function(){
+  // e.preventDefault();
+  let value = this.value.trim("") 
+  if(value === "") {
+    onfocus_input = false;
+  }
+  container.innerHTML = ""
+  count = 0;
+  console.log(results)
+  const search_arr = results.filter(e => e.name.includes(value))
+  console.log(search_arr.length)
+  render(search_arr , count , 20)
+})
 window.addEventListener("scroll", function () {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    render(count);
+  console.log(onfocus_input);
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight && onfocus_input == false) {
+    render(results , count , 50); 
     count += 50;
   }
 });
 
-async function render(count) {
-  const render_poke = results.slice(count, count + 50);
+async function render(results , count , count_slice) {
+  const render_poke = results.slice(count, count + count_slice);
   for (let i = 0; i < render_poke.length; i++) {
     const poke = await fetch(render_poke[i].url).then((response) =>
       response.json()
     );
-
-    console.log(poke);
     const type_container = document.createElement("div");
     type_container.classList.add("type_container");
     poke.types.forEach((e) => {
-      console.log(e.type);
       const typebox = document.createElement("div");
       let type_background = type_choice(e.type.name);
       typebox.style.background = type_background;
@@ -42,10 +53,8 @@ async function render(count) {
       type_container.append(typebox);
     });
     const box = document.createElement("div");
-    console.log(poke);
     box.classList.add("box");
     let innerimg = poke.sprites.versions?.["generation-v"]?.["black-white"].animated.front_default;
-    console.log(innerimg);
     box.innerHTML = `
     <img src="${!innerimg ? poke.sprites.front_default : innerimg}" alt="">
     <p>${poke.name}</p>
@@ -59,10 +68,8 @@ async function render(count) {
 
 function type_choice(type) {
   let background;
-  console.log(type);
   switch (type) {
     case "ice":
-      console.log(type);
       background = "skyblue";
       break;
     case "grass":
@@ -120,4 +127,3 @@ function type_choice(type) {
   }
   return background;
 }
-console.log(results);

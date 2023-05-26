@@ -7,8 +7,8 @@
 
 .container{
   margin: 0 auto;
-  border: 1px solid black;
-  width: 80%;
+  /* border: 1px solid black; */
+  width: 100%;
   display: flex;
   gap: 50px;
   /* justify-content: space-between; */
@@ -43,4 +43,19 @@
   width: 100px;
   /* animation: img_animation .6s infinite alternate; */
   height: 100px;
+}
+.wrap{
+  margin: 0 auto;
+  text-align: center;
+  width: 80%;
+}
+.search_input{
+  top: 0;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  width: 800px; 
+  height: 50px;
+  font-size: 35px;
 }
